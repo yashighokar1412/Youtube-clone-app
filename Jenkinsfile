@@ -45,8 +45,7 @@ pipeline {
                 script {
                     withAWS(credentials: 'aws') {
                         withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
-                            sh 'kubectl delete deployment youtube-deployment'
-                            sh ' rm -f deployment.yml'
+                            sh 'kubectl get deployment'
                         }
                     }
                 }
