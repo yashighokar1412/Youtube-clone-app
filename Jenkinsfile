@@ -12,7 +12,6 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker', url: 'https://index.docker.io/v1/') {
-                        sh 'docker build -t youtube .'
                         sh 'docker images'
                     }
                 }
@@ -23,9 +22,20 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker', url: 'https://index.docker.io/v1/') {
-                        sh 'docker tag youtube:latest yashthedocker/youtube:01'
-                        sh 'docker push yashthedocker/youtube:01'
-                    }
+                        sh 'docker rmi -f 585f8087f30c'
+                        sh 'docker rmi -f 585f8087f30c'
+                        sh 'docker rmi -f 8fbc04d1d4ec'
+                        sh 'docker rmi -f 6a31f26f816f'
+                        sh 'docker rmi -f 51e9d8be3d21'
+                        sh 'docker rmi -f 8febaace991d'
+                        sh 'docker rmi -f aaa828f2be93'
+                        sh 'docker rmi -f aae31105d7'
+                        sh 'docker rmi -f 54526cc2362f'
+                        sh 'docker rmi -f d698ce5b06b9'
+                        sh 'docker rmi -f f0b0d0c27143'
+                        sh 'docker rmi -f 1ddc7e4055fd'
+                        sh 'docker rmi -f eb8b8b8a3610'
+                    } 
                 }
             }
         }
@@ -35,7 +45,8 @@ pipeline {
                 script {
                     withAWS(credentials: 'aws') {
                         withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
-                            sh 'kubectl apply -f deployment.yml'
+                            sh 'kubectl delete deployment youtube-deployment'
+                            sh ' rm -f deployment.yml'
                         }
                     }
                 }
@@ -47,7 +58,8 @@ pipeline {
                 script {
                     withAWS(credentials: 'aws') {
                         withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
-                            sh 'kubectl apply -f service.yml'
+                            sh 'rm -f service.yml'
+                            sh 'kubectl delete service youtube-servic'
                             sh 'kubectl get pod'
                             sh 'kubectl get deployment'
                             sh  'kubectl get service'
