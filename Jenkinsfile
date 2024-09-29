@@ -32,8 +32,17 @@ pipeline {
                         sh 'kubectl apply -f deployment.yml'          
     }
 }
-                stage('deploy to k8s') {
+        stage('deploy to k8s') {
             steps { withAWS(credentials: 'aws') {
                 script {withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
                         sh 'kubectl apply -f service.yml' 
-            }}}}}}}}}}
+            }
+                       }
+            }
+                  }
+        }
+            }
+                  }
+        }
+    }
+}
