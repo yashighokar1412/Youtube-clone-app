@@ -48,6 +48,9 @@ pipeline {
                     withAWS(credentials: 'aws') {
                         withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
                             sh 'kubectl apply -f service.yml'
+                            sh 'kubectl get pod'
+                            sh 'kubectl get deployment'
+                            sh  'kubectl get service'
                         }
                     }
                 }
