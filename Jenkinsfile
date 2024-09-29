@@ -9,7 +9,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                  withDockerRegistry(credentialsId: 'docker', url: 'https://index.docker.io/v1/)') {
+               withDockerRegistry(credentialsId: 'docker', url: 'https://index.docker.io/v1/') {
                         sh 'docker build -t youtube .'
                         sh 'docker images'
                     }
@@ -19,7 +19,7 @@ pipeline {
         stage('Tag and Push Docker Image') {
             steps {
                 script {
-                   withDockerRegistry(credentialsId: 'docker', url: 'https://index.docker.io/v1/)') {
+                  withDockerRegistry(credentialsId: 'docker', url: 'https://index.docker.io/v1/') {
                         sh 'docker tag youtube:latest yashthedocker/youtube:01'
                         sh 'docker push yashthedocker/youtube:01'
                     }
