@@ -3,13 +3,13 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/yashighokar1412/Youtube-clone-app.git'
+               git branch: 'main', url: 'https://github.com/yashighokar1412/Youtube-clone-app.git'
             }
         }
         stage('Build Docker Image') {
             steps {
                 script {
-                    withDockerRegistry(credentialsId: 'docker', url: 'https://index.docker.io/v1/') {
+                  withDockerRegistry(credentialsId: 'docker', url: 'https://index.docker.io/v1/') {
                         sh 'docker build -t youtube .'
                         sh 'docker images'
                     }
