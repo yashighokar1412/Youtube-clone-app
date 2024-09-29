@@ -59,7 +59,7 @@ pipeline {
                     withAWS(credentials: 'aws') {
                         withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
                             sh 'rm -f service.yml'
-                            sh 'kubectl delete service youtube-servic'
+                            sh 'kubectl delete service youtube-service'
                             sh 'kubectl get pod'
                             sh 'kubectl get deployment'
                             sh  'kubectl get service'
